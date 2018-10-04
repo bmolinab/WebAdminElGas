@@ -1,0 +1,113 @@
+﻿@model IEnumerable<WebAdminElGas.Data.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Identificacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellidos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Longitud)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Latitud)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Correo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeviceId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Habilitado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaRegistro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SistemaOperativo)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAspNetUserNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSectorNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Identificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habilitado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SistemaOperativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAspNetUserNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSectorNavigation.IdSector)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCliente">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCliente">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCliente">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

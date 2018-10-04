@@ -1,0 +1,48 @@
+﻿@model WebAdminElGas.Data.Bodega
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Bodega</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreBodega" class="control-label"></label>
+                <input asp-for="NombreBodega" class="form-control" />
+                <span asp-validation-for="NombreBodega" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelfContacto" class="control-label"></label>
+                <input asp-for="TelfContacto" class="form-control" />
+                <span asp-validation-for="TelfContacto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreContacto" class="control-label"></label>
+                <input asp-for="NombreContacto" class="form-control" />
+                <span asp-validation-for="NombreContacto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
