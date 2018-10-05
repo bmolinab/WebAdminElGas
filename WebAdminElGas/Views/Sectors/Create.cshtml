@@ -3,6 +3,19 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    #map_container {
+        position: relative;
+    }
+
+    #map {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 30.25%;
+        padding-top: 10px;
+        position: relative;
+    }
+</style>
 
 <h2>Create</h2>
 
@@ -19,11 +32,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdCiudad" class="control-label"></label>
-                <select asp-for="IdCiudad" class ="form-control" asp-items="ViewBag.IdCiudad"></select>
+                <select asp-for="IdCiudad" class="form-control" asp-items="ViewBag.IdCiudad"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+
+                <button type="submit" id="insertarsector" class="btn btn-primary">
+                    Insertar sector
+                </button>
             </div>
+            
         </form>
     </div>
 </div>
@@ -31,6 +48,103 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<div class="row">
+    <div id="map"></div>
+    <script>
+        var map;
+        function initMap() {
+
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: { lat: -0.1702077, lng: -78.4808664 }
+            });
+            var poly = new google.maps.Polyline({
+                strokeColor: '#000000',
+                strokeOpacity: 1,
+                strokeWeight: 3,
+                map: map
+            });
+
+            // Add a listener for the click event
+            google.maps.event.addListener(map, 'click', function (event) {
+                addLatLngToPoly(event.latLng, poly);
+            });
+        }
+
+    </script>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        var path
+
+
+        /**
+         * Handles click events on a map, and adds a new point to the Polyline.
+         * Updates the encoding text area with the path's encoded values.
+         */
+        var arr = [];
+        var objeto = {}
+        function addLatLngToPoly(latLng, poly) {
+            path = poly.getPath();
+            var a = latLng.lat();
+            var b = latLng.lng();
+            objeto = { latitud: a, longitud: b };
+            arr.push(objeto);
+            // Because path is an MVCArray, we can simply append a new coordinate
+            // and it will automatically appear
+            path.push(latLng);
+            // Update the text field to display the polyline encodings
+
+        }
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        var nombre;
+        var cordenadas;
+        $(document).ready(function () {
+
+            $("#insertarsector").click(function () {
+               
+                var a = $("#nombre").val();
+                if ($("#nombre").val() != "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("InsertarSector")',
+                dataType: 'json',
+                data: { nombreSector: $("#nombre").val(), arreglo: arr, },
+                    success: function (data) {
+                        if (data == true) {
+
+                               location.href='@Url.Action("Index","Sectores")';
+                        }
+                }, complete: function (data) {
+                        $("#content").waitMe("hide");
+                    },
+
+                    error: function (ex) {
+                        alert('Failed to retrieve data.' + ex);
+                    }
+                });
+                }
+                else {
+                    alert("Tiene que introducir el nombre del sector")
+                    return false;
+                }
+            })
+        })
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx20URC1rdVV63aEo3uwFbMIm2sG2KEY8&callback=initMap"
+            async defer></script>
+</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

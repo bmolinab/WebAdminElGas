@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAdminElGas.Data;
+using WebAdminElGas.Models;
 
 namespace WebAdminElGas.Controllers
 {
@@ -185,6 +186,46 @@ namespace WebAdminElGas.Controllers
         private bool SectorExists(int id)
         {
             return _context.Sector.Any(e => e.IdSector == id);
+        }
+
+
+        public async Task<JsonResult> InsertarSector(string nombreSector, List<Posiciones> arreglo)
+        {
+
+            //if (string.IsNullOrEmpty(nombreSector) || arreglo.Count <= 2)
+            //{
+            //    return Json(false);
+            //}
+
+            //IdentityPersonalizado ci = (IdentityPersonalizado)HttpContext.User.Identity;
+            //string nombreUsuario = ci.Identity.Name;
+            //var administrador = new Administrador { Nombre = nombreUsuario };
+            //administrador = await ProveedorAutenticacion.GetUser(administrador);
+
+            //var lista = new List<PuntoSector>();
+
+            //foreach (var item in arreglo)
+            //{
+            //    //item.latitud=item.latitud.Replace(".", ",");
+            //    //item.longitud=item.longitud.Replace(".", ",");
+            //    lista.Add(new PuntoSector { Latitud = Convert.ToDouble(item.latitud), Longitud = Convert.ToDouble(item.longitud) });
+
+            //}
+
+            //var sector = new SectorViewModel
+            //{
+            //    Sector = new Sector { NombreSector = nombreSector, EmpresaId = administrador.EmpresaId },
+            //    PuntoSector = lista,
+            //};
+
+
+
+            //var response = await ApiServicio.InsertarAsync(sector, new Uri(WebApp.BaseAddress), "/api/Sectors/InsertarSector");
+            //if (!response.IsSuccess)
+            //{
+            //    return Json(false);
+            //}
+            return Json(true);
         }
     }
 }
